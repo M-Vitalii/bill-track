@@ -1,0 +1,16 @@
+version: '3.9'
+services:
+  bill_track_db:
+    image: postgres:15
+    container_name: bill_track_db
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: bill_track_db
+    volumes:
+      - bill_track_db:/var/lib/postgresql/data
+
+volumes:
+  bill_track_db:
