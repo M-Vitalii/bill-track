@@ -14,7 +14,7 @@ import { Employee, Department, Project, Workday, Invoice } from './entities';
         password: configService.getOrThrow<string>('DATABASE_PASSWORD'),
         database: configService.getOrThrow<string>('DATABASE_NAME'),
         entities: [Employee, Department, Project, Workday, Invoice],
-        synchronize: true,
+        synchronize: false,
       }),
       inject: [ConfigService],
     }),
