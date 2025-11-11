@@ -1,5 +1,5 @@
 import { Column, Entity } from 'typeorm';
-import { AuditableEntity } from './auditable-entity';
+import { AuditableEntity } from './auditable.entity';
 
 @Entity()
 export class User extends AuditableEntity {

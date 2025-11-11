@@ -1,6 +1,6 @@
 import { Column, Entity, OneToMany } from 'typeorm';
-import { AuditableEntity } from './auditable-entity';
-import { Employee } from './employee';
+import { AuditableEntity } from './auditable.entity';
+import { Employee } from './employee.entity';
 
 @Entity()
 export class Department extends AuditableEntity {

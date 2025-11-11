@@ -1,9 +1,9 @@
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
-import { AuditableEntity } from './auditable-entity';
-import { Department } from './department';
-import { Project } from './project';
-import { Workday } from './workday';
-import { Invoice } from './invoice';
+import { AuditableEntity } from './auditable.entity';
+import { Department } from './department.entity';
+import { Project } from './project.entity';
+import { Workday } from './workday.entity';
+import { Invoice } from './invoice.entity';
 
 @Entity()
 export class Employee extends AuditableEntity {
