@@ -1,6 +1,10 @@
 import { Request } from 'express';
-import { JwtPayload } from './jwt-payload.interface';
+import { AuthenticatedUser } from './authenticated-user.type';
 
 export interface AuthenticatedRequest extends Request {
-  user?: JwtPayload;
+  user?: AuthenticatedUser;
+  cookies: {
+    Authentication?: string;
+    Refresh?: string;
+  };
 }

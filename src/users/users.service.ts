@@ -12,4 +12,18 @@ export class UsersService {
   async findOne(email: string): Promise<User | null> {
     return this.usersRepository.findOne({ where: { email: email } });
   }
+
+  async findOneById(id: string): Promise<User | null> {
+    return this.usersRepository.findOne({ where: { id: id } });
+  }
+
+  async create(user: User): Promise<User> {
+    return this.usersRepository.save(user);
+  }
+
+  async updateUserRefreshToken(userId: number | string, refreshToken: string) {
+    await this.usersRepository.update(userId, {
+      hashedRefreshToken: refreshToken,
+    });
+  }
 }

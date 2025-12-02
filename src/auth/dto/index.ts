@@ -1,2 +1,1 @@
-export * from './sign-in-request.dto';
-export * from './sign-in-response.dto';
+export * from './register.dto';
