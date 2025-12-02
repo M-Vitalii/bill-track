@@ -34,11 +34,8 @@ export default tseslint.config(
       '@typescript-eslint/no-unused-vars': [
         'error',
         {
-          // This ensures that the linter ignores our destructuring syntax:
-          // const { password: _, hashedRefreshToken: __, ...result } = user;
           varsIgnorePattern: '^_',
           argsIgnorePattern: '^_',
-          // Keep ignoreRestSiblings for compatibility with your base rule
           ignoreRestSiblings: true,
         },
       ],
