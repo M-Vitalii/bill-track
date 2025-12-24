@@ -7,5 +7,13 @@ export class User extends AuditableEntity {
   email: string;
 
   @Column()
-  password: string;
+  hashedPassword: string;
+
+  @Column({ nullable: true })
+  hashedRefreshToken?: string;
+
+  constructor(partial?: Partial<User>) {
+    super();
+    Object.assign(this, partial);
+  }
 }
