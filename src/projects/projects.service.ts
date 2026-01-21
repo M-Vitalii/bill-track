@@ -1,0 +1,57 @@
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import {
+  PaginationQueryDto,
+  PaginationResponseDto,
+} from 'src/common/models/dto/pagination';
+import { paginate } from 'src/common/utils/pagination/paginate.util';
+import { Project } from 'src/database/entities';
+import { Repository } from 'typeorm';
+import { CreateProjectDto, UpdateProjectDto } from './dto';
+
+@Injectable()
+export class ProjectsService {
+  constructor(
+    @InjectRepository(Project)
+    private readonly projectsRepository: Repository<Project>,
+  ) {}
+
+  async createProject(dto: CreateProjectDto): Promise<Project> {
+    const project = this.projectsRepository.create(dto);
+
+    return this.projectsRepository.save(project);
+  }
+
+  async getProjectById(id: string): Promise<Project> {
+    const project = await this.projectsRepository.findOneBy({ id });
+
+    if (!project) throw new NotFoundException();
+
+    return project;
+  }
+
+  async getProjects(
+    paginationDto: PaginationQueryDto,
+  ): Promise<PaginationResponseDto<Project>> {
+    return await paginate(this.projectsRepository, paginationDto);
+  }
+
+  async deleteProject(id: string): Promise<void> {
+    const result = await this.projectsRepository.softDelete(id);
+
+    if (!result.affected) throw new NotFoundException();
+  }
+
+  async updateProject(id: string, project: UpdateProjectDto): Promise<Project> {
+    const existingProject = await this.projectsRepository.findOneBy({ id });
+
+    if (!existingProject) throw new NotFoundException('Project not found');
+
+    const updatedProject = this.projectsRepository.merge(
+      existingProject,
+      project,
+    );
+
+    return this.projectsRepository.save(updatedProject);
+  }
+}

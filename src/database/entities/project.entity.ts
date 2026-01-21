@@ -7,6 +7,6 @@ export class Project extends AuditableEntity {
   @Column()
   name: string;
 
-  @OneToMany(() => Employee, (employee) => employee.department)
+  @OneToMany(() => Employee, (employee) => employee.project)
   employees: Employee[];
 }
