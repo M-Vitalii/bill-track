@@ -23,7 +23,7 @@ export class DepartmentsService {
   async createDepartment(dto: CreateDepartmentDto): Promise<Department> {
     try {
       const department = this.departmentsRepository.create(dto);
-      return await this.departmentsRepository.save(department);
+      return this.departmentsRepository.save(department);
     } catch (error) {
       console.error(error);
       throw new BadRequestException('Failed to create department');
@@ -64,7 +64,7 @@ export class DepartmentsService {
 
     try {
       const updated = this.departmentsRepository.merge(existing, dto);
-      return await this.departmentsRepository.save(updated);
+      return this.departmentsRepository.save(updated);
     } catch (error) {
       console.error(error);
       throw new BadRequestException('Failed to update department');
