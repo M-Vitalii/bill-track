@@ -19,17 +19,21 @@ export class Employee extends AuditableEntity {
   @Column()
   salary: number;
 
-  @Column()
-  departmentId: string;
+  @Column({ nullable: true })
+  departmentId: string | null;
 
-  @Column()
-  projectId: string;
+  @Column({ nullable: true })
+  projectId: string | null;
 
-  @ManyToOne(() => Department, (department) => department.employees)
-  department: Department;
+  @ManyToOne(() => Department, (department) => department.employees, {
+    nullable: true,
+  })
+  department: Department | null;
 
-  @ManyToOne(() => Project, (project) => project.employees)
-  project: Project;
+  @ManyToOne(() => Project, (project) => project.employees, {
+    nullable: true,
+  })
+  project: Project | null;
 
   @OneToMany(() => Workday, (workday) => workday.employee)
   workdays: Workday[];
