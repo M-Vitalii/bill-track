@@ -17,6 +17,7 @@ import {
 } from 'src/common/models/dto/pagination';
 import { CreateWorkdayDto, UpdateWorkdayDto, WorkdayResponseDto } from './dto';
 import { WorkdaysService } from './workdays.service';
+import { GetWorkdaysQueryDto } from './dto/get-workdays-query.dto';
 
 @Controller('workdays')
 export class WorkdaysController {
@@ -41,7 +42,7 @@ export class WorkdaysController {
   @Get('employee/:employeeId')
   async getWorkdaysByEmployeeId(
     @Param('employeeId') employeeId: string,
-    @Query() paginationDto: PaginationQueryDto,
+    @Query() paginationDto: GetWorkdaysQueryDto,
   ): Promise<PaginationResponseDto<WorkdayResponseDto>> {
     const workdays = await this.workdaysService.getWorkdaysByEmployeeId(
       employeeId,

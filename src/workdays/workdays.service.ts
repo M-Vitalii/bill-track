@@ -83,7 +83,13 @@ export class WorkdaysService {
     const where: FindOptionsWhere<Workday> = { employee: { id: employeeId } };
 
     if (startDate && endDate) {
-      where.date = Between(new Date(startDate), new Date(endDate));
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+
+      if (start > end) {
+        throw new BadRequestException('endDate cannot be before startDate.');
+      }
+      where.date = Between(start, end);
     } else if (startDate || endDate) {
       throw new BadRequestException(
         'Both startDate and endDate must be provided for date range filtering.',
